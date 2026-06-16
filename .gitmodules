@@ -1,4 +1,4 @@
 [submodule "ci-cdash"]
 	path = ci-cdash
 	url = https://github.com/NOAA-EMC/ci-cdash
-  branch = develop
+    branch = develop
