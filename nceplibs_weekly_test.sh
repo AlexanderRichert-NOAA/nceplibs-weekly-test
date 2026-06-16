@@ -1,6 +1,7 @@
 #!/bin/bash
 
-USE_PBS=YES
+# Using PBS during `spack install` will break CDash pushes
+USE_PBS=${USE_PBS:-NO}
 
 function alert_failure() {
   mail -s 'NCEPLIBS weekly build failure' $(whoami)@noaa.gov  < <(echo "Weekly NCEPLIBS build failed for $SPACK_ENV.")
