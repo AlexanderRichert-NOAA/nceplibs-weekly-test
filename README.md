@@ -1,5 +1,7 @@
 This workflow is intended to run through cron to build NCEPLIBS on Acorn weekly:
 ```console
+NOSCRUB=...
+PTMP=...
 24 17 * * MON $NOSCRUB/nceplibs-weekly-test/nceplibs_weekly_test.sh > $PTMP/nceplibs-weekly-test/logs/$(date +\%Y\%m\%d).cron 2>&1
 ```
 
