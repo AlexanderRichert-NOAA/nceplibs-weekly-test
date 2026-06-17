@@ -41,14 +41,6 @@ spack:
             c: /opt/cray/pe/craype/2.7.17/bin/cc
             cxx: /opt/cray/pe/craype/2.7.17/bin/CC
             fortran: /opt/cray/pe/craype/2.7.17/bin/ftn
-    intel-oneapi-compilers:
-      externals:
-      - spec: intel-oneapi-compilers@2021.1
-        prefix: /pe/intel/compilers_and_libraries_2020.4.304/linux
-        extra_attributes:
-          compilers:
-            c: /pe/intel/compilers_and_libraries_2020.4.304/linux/bin/icx
-            cxx: /pe/intel/compilers_and_libraries_2020.4.304/linux/bin/icpx
     mpi:
       buildable: false
       require: cray-mpich

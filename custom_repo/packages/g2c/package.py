@@ -16,7 +16,7 @@ class G2c(BuiltinG2c):
 
     depends_on("valgrind", type=("build"))
 
-    def check(self):
+    def install(self, spec, prefix):
         with working_dir(self.build_directory):
             ctest(
                 "-VV",
@@ -29,3 +29,4 @@ class G2c(BuiltinG2c):
                 "-DAUTH_TOKEN_FILE=" + self.spec.variants["authtokenfile"].value,
                 "-DCTEST_SITE=" + self.spec.variants["ctest_site"].value,
             )
+            cmake("--install", self.build_directory)

@@ -16,7 +16,7 @@ class Ip(BuiltinIp):
 
     depends_on("valgrind", type=("build"))
 
-    def check(self):
+    def install(self, spec, prefix):
         with working_dir(self.build_directory):
             # JCSDA repo only; main Spack repo should just use `ctest("-L", "NO_INPUT_DATA")`
             if self.spec.satisfies("+alltests") or self.spec.satisfies("@:5.2"):
@@ -40,3 +40,4 @@ class Ip(BuiltinIp):
                     "-DCTEST_SITE=" + self.spec.variants["ctest_site"].value,
                     "-L", "NO_INPUT_DATA",
                 )
+            cmake("--install", self.build_directory)

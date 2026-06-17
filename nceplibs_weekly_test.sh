@@ -45,6 +45,8 @@ for p in $(grep -oP "[-\w]+@develop" ${SPACK_ENV}/spack.yaml); do spack develop 
 # Patch needed for JCSDA repo as of Apr 2025:
 #sed -i 's|self\.builder|self.|' $(spack location --package-dir g2)/package.py
 
+spack external find --not-buildable --path /apps/spack/cmake/3.30.5/intel/19.1.3.304/xkpegogpnyae4l2anf6dm77o7ksrez6t/ cmake
+
 if [ ${USE_PBS} == YES ]; then
   cd ${logdir}
   qsub -Wblock=true -N ${envname}.concretize -j oe -A NCEPLIBS-DEV -q dev -l walltime=00:10:00,select=1:ncpus=4:mem=4GB -V -- $(which spack) concretize --jobs 4
@@ -56,9 +58,9 @@ spack fetch --missing &> ${logdir}/${envname}.fetch
 
 if [ ${USE_PBS} == YES ]; then
   cd ${logdir}
-  qsub -Wblock=true -N ${envname}.install -j oe -A NCEPLIBS-DEV -q dev -l walltime=00:55:00,select=1:ncpus=16:mem=8GB -V -- ${configdir}/parallel_install.sh 2 8 --test root
+  qsub -Wblock=true -N ${envname}.install -j oe -A NCEPLIBS-DEV -q dev -l walltime=00:55:00,select=1:ncpus=16:mem=8GB -V -- ${configdir}/parallel_install.sh 2 8
 else
-  ${configdir}/parallel_install.sh 2 3 --test root
+  ${configdir}/parallel_install.sh 2 3
 fi
 
 mail -s 'NCEPLIBS weekly build success' $(whoami)@noaa.gov  < <(echo "Weekly NCEPLIBS build succeeded for $SPACK_ENV.")
